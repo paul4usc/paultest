@@ -1,0 +1,20 @@
+name: fetch_freMTPL2_data
+description: Pulls frequency and severity french MTPL2 auto datasets
+outputs:
+  - {name: output_frequency_path, type: String, description: 'path for freqency table'}
+  - {name: output_severity_path, type: String, description: 'path for severity table'}
+metadata:
+  annotations:
+    author: Joshua Schmidt <joshua.schmidt@duckcreek.com>
+    canonical_location: ''
+implementation:
+  container:
+    image: dctkubeflow.azurecr.io/ml-pipeline/component/sample_data/fetch_fremtpl2:caa
+    command: [
+    python3, 
+    /pipelines/component/src/fetchMTPL2_sample_data.py
+      --fr-path, 
+      {outputPath: output_frequency_path},
+      --sev-path, 
+      {outputPath: output_severity_path},
+    ]
